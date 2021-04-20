@@ -17,10 +17,21 @@ def importConstituencies():
         if row[0] == 'Constituency':
           continue
         else: 
-          print(row[0])
+          # print(row[0])
           constituencies.append(Constituency(row[0], row[1], row[2]))
     
     return constituencies
 
+
+def getURLS(constituencies):
+    base_url = 'https://petition.parliament.uk/petitions/local/'
+
+    for constituency in constituencies:
+      print("\nChecking constituency name")
+      add_url = constituency.constituency.replace(" ", "-")
+      full_url = base_url + add_url.lower()
+      print(full_url)
+
 list = importConstituencies()
-print(len(list))
+# print(len(list))
+getURLS(list)
