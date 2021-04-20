@@ -27,15 +27,33 @@ def getURLS(constituencies):
   base_url = 'https://petition.parliament.uk/petitions/local/'
 
   for constituency in constituencies:
-    print("\nChecking constituency name")
-    add_url = constituency.constituency.replace(" ", "-")
+    # print("\nChecking constituency name")
+    add_url = constituency.constituency.replace(" ", "-").replace(",", "")
     full_url = base_url + add_url.lower()
     constituency.link = full_url
-    print(constituency.constituency)
-    print(constituency.link)
+    # print(constituency.constituency)
+    # print(constituency.link)
   
   return constituencies
 
-list = importConstituencies()
 
-getURLS(list)
+def checkBrokenPages(url_list):
+    broken = []
+
+    for const in url_list:
+      url = const.link
+      page = requests.get(url)
+      soup = BeautifulSoup(page.content, 'html.parser')
+
+      if "The page you're looking for doesn't exist" in soup.find('h1').text:
+        broken.append(const.constituency)
+        print(url)
+      else:
+        continue
+    
+    print(broken)
+
+
+list = importConstituencies()
+urls = getURLS(list)
+checkBrokenPages(urls)
