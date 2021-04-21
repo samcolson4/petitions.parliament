@@ -25,6 +25,7 @@ def scrapeArrayToJson(data):
 
 
 def writeToCSV(data, file):
+    rows = data['petitions']['list']
 
     with open(file, mode='w') as csv_file:
         fieldnames = [
@@ -46,7 +47,7 @@ def writeToCSV(data, file):
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()
 
-        for row in data:
+        for row in rows:
             writer.writerow({
                       'Constituency': row['Constituency'],
                       'Area': row['Area'],

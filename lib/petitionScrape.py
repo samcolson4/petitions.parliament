@@ -1,10 +1,11 @@
 from allurls import allConstituencies
-from writer import scrapeArrayToJson
+from writer import scrapeArrayToJson, writeToCSV
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 import requests
 import re
 
+check = './constituency_output.csv'
 
 #  get MP name
 #  get top three petitions & numbers for them 
@@ -79,3 +80,7 @@ def runScript():
     print(json)
 
     file = './constituency_output.csv'
+    writeToCSV(json, file)
+
+
+runScript()
