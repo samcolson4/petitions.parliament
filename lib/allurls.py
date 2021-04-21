@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime, timedelta
 import requests
 import re
 import csv
@@ -54,8 +53,8 @@ def checkBrokenPages(url_list):
     print(broken)
 
 
-def allURLS():
+def allConstituencies():
     list = importConstituencies()
-    urls = getURLS(list)
+    constituencies = getURLS(list)
 
-    return urls
+    return constituencies
