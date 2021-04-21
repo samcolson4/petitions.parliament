@@ -1,4 +1,5 @@
 from allurls import allConstituencies
+from writer import scrapeArrayToJson
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 import requests
@@ -10,7 +11,10 @@ import re
 #  write to CSV in correct constituency
 
 def getMPName(soup):
-    return soup.find(class_="lede").find('a').text
+    if soup.find(class_="lede"):
+        return soup.find(class_="lede").find('a').text
+    else:
+        return ""
 
 
 def getSigs(item):
@@ -66,7 +70,12 @@ def getData():
     return all_data
 
 
-# 1. Get data         
-data = getData()
+def runScript():
+    # 1. Get data         
+    data = getData()
 
-# 2. Write data to CSV
+    # 2. Write data to CSV
+    json = scrapeArrayToJson(data)
+    print(json)
+
+    file = './constituency_output.csv'
