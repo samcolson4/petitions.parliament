@@ -42,8 +42,10 @@ def getPetitionData(soup):
 
 def getData():
     constits = allConstituencies()
+    all_data = []
 
     for constituency in constits:
+        constituency_data = []
         page = requests.get(constituency.link)
         soup = BeautifulSoup(page.content, 'html.parser')
         
@@ -51,9 +53,20 @@ def getData():
 
         petition_data = getPetitionData(soup)
 
-        print(constituency.constituency, mp_name, petition_data)
+        constituency_data.append(constituency.constituency)
+        constituency_data.append(constituency.area)
+        constituency_data.append(constituency.link)
+        constituency_data.append(mp_name)
+        constituency_data.extend(petition_data)
+
+        print(constituency_data)
         print("\n")
+        all_data.append(constituency_data)
+    
+    return all_data
 
-        
 
-getData()
+# 1. Get data         
+data = getData()
+
+# 2. Write data to CSV
