@@ -54,6 +54,8 @@ def checkBrokenPages(url_list):
     print(broken)
 
 
-list = importConstituencies()
-urls = getURLS(list)
-checkBrokenPages(urls)
+def allURLS():
+    list = importConstituencies()
+    urls = getURLS(list)
+
+    return urls
