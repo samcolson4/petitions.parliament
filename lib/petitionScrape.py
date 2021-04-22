@@ -7,16 +7,11 @@ import re
 
 check = './constituency_output.csv'
 
-#  get MP name
-#  get top three petitions & numbers for them 
-#  write to CSV in correct constituency
-
 def getMPName(soup):
     if soup.find(class_="lede"):
         return soup.find(class_="lede").find('a').text
     else:
         return ""
-
 
 def getSigs(item):
     full_string = item.find('p').text
