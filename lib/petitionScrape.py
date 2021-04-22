@@ -20,7 +20,7 @@ def getSigs(item):
     output_text = []
     
     for text in split_text:
-        digits = re.sub('\D', '', f'{text}')
+        digits = re.sub(r'\D', '', f'{text}')
         output_text.append(digits)
 
     return output_text[0], output_text[1]
