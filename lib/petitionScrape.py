@@ -13,6 +13,7 @@ def getMPName(soup):
     else:
         return ""
 
+
 def getSigs(item):
     full_string = item.find('p').text
     split_text = full_string.split("(")
